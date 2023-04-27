@@ -1,0 +1,29 @@
+.admin-home-container{
+    flex-direction: row;
+    display: flex;
+}
+
+.left{
+    width: 15%;
+}
+
+.right{
+    width: 85%;
+    margin-left:3px;
+}
+
+.right-bottom{
+    padding: 10px;
+}
+
+.Upload-Master{
+    padding: 20px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+}
+
+.Upload-Master:hover{
+    background-color: rgb(48, 48, 255);
+    color: white;
+}
