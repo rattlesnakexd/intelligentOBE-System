@@ -1,0 +1,33 @@
+.vertical-navbar{
+    height: 100vh;
+    border: 1px solid black;
+    width: 100%;
+    background-color: rgb(48, 48, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: auto;
+    
+}
+.nav-item{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+    color: black;
+    
+}
+
+.item-link{
+    text-decoration: none;
+    color: white;
+}
+
+.item-link:hover{
+    color:yellow;
+}
