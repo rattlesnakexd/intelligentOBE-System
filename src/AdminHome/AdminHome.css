@@ -26,4 +26,5 @@
 .Upload-Master:hover{
     background-color: rgb(48, 48, 255);
     color: white;
+    transform: scale(1.1);
 }
