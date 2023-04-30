@@ -2,6 +2,7 @@ import React from "react";
 import VerticalNavbar from "../navbar/navbar";
 import TopBar from "../topbar/topbar";
 import Button from "../button/button";
+import DropdownMenu from "../dropDown Menu/dropDown";
 import './AdminHome.css'
 
 function AdminHome(){
@@ -26,7 +27,9 @@ function AdminHome(){
             <h1>Upload Master Sheet</h1>
             <Button label={"Upload Master Sheet"}></Button>
             <div className="lists">
-                
+                <DropdownMenu label={"Semester No"}></DropdownMenu>
+                <DropdownMenu label={"Course"}></DropdownMenu>
+
             </div>
 
             </div>
