@@ -1,6 +1,7 @@
 import React from "react";
 import VerticalNavbar from "../navbar/navbar";
 import TopBar from "../topbar/topbar";
+import Button from "../button/button";
 import './AdminHome.css'
 
 function AdminHome(){
@@ -23,8 +24,9 @@ function AdminHome(){
             </div>
             <div className="right-bottom">
             <h1>Upload Master Sheet</h1>
-            <button className="Upload-Master">Upload Master Sheet</button>
+            <Button label={"Upload Master Sheet"}></Button>
             <div className="lists">
+                
             </div>
 
             </div>
