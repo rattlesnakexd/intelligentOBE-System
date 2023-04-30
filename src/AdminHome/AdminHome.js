@@ -28,7 +28,7 @@ function AdminHome(){
             <Button label={"Upload Master Sheet"}></Button>
             <div className="lists">
                 <DropdownMenu label={"Semester No"}></DropdownMenu>
-                <DropdownMenu label={"Course"}></DropdownMenu>
+                <DropdownMenu label={"Course Name"}></DropdownMenu>
 
             </div>
 

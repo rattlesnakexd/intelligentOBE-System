@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./dropDown.css"; // import the CSS file for the component
+import "./dropDown.css";
 
 function DropdownMenu(props) {
   const [showMenu, setShowMenu] = useState(false);
@@ -12,6 +12,7 @@ function DropdownMenu(props) {
     <div className="dropdown">
       <button className="dropbtn" onClick={toggleMenu}>
         {props.label}
+        <i className={`arrow ${showMenu ? 'up' : 'down'}`} /> {/* add arrow icon */}
       </button>
       {showMenu && (
         <div className="dropdown-content">
