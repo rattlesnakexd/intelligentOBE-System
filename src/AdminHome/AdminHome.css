@@ -32,3 +32,13 @@
 .lists{
     margin-top: 20px;
 }
+
+.table{
+    flex-direction: row;
+    display: flex;
+}
+
+.table-data{
+    border: 1px solid red;
+    width: 70%;
+}

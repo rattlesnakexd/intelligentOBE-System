@@ -13,6 +13,7 @@ function AdminHome(){
         { id: 3, label: 'Logout', url: '/logout' },
       ];
     const topbarName = 'Admin';
+
     return(
         <div className="admin-home-container">
             <div className="left">
@@ -29,9 +30,8 @@ function AdminHome(){
             <div className="lists">
                 <DropdownMenu label={"Semester No"}></DropdownMenu>
                 <DropdownMenu label={"Course Name"}></DropdownMenu>
-
             </div>
-
+        
             </div>
             
 
