@@ -31,6 +31,12 @@ function AdminHome(){
                 <DropdownMenu label={"Semester No"}></DropdownMenu>
                 <DropdownMenu label={"Course Name"}></DropdownMenu>
             </div>
+            <div className="table">
+                <div className="table-data">
+                    
+
+                </div>
+            </div>
         
             </div>
             
