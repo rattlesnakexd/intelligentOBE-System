@@ -4,6 +4,7 @@ import TopBar from "../topbar/topbar";
 import Button from "../button/button";
 import DropdownMenu from "../dropDown Menu/dropDown";
 import './AdminHome.css'
+import Table from "../table/table";
 
 function AdminHome(){
 
@@ -13,6 +14,12 @@ function AdminHome(){
         { id: 3, label: 'Logout', url: '/logout' },
       ];
     const topbarName = 'Admin';
+    const columns = ["Name", "Location"];
+    const data = [
+      { Name: "John", Location: "New York" },
+      { Name: "Mary",  Location: "Los Angeles" },
+      { Name: "Bob", Location: "Chicago" },
+    ];
 
     return(
         <div className="admin-home-container">
@@ -33,8 +40,13 @@ function AdminHome(){
             </div>
             <div className="table">
                 <div className="table-data">
-                    
+                    <Table columns={columns} data={data}></Table>
 
+                </div>
+                <div className="table-actions">
+                    <button>Add</button>
+                    <button>Remove</button>
+                    <button>Edit</button>
                 </div>
             </div>
         
