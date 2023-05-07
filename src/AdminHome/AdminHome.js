@@ -44,9 +44,6 @@ function AdminHome(){
 
                 </div>
                 <div className="table-actions">
-                    <button>Add</button>
-                    <button>Remove</button>
-                    <button>Edit</button>
                 </div>
             </div>
         
