@@ -1,7 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react';
+import axios from 'axios';
 import './Login.css'
 
 function Login(){
+    const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const handleLogin = async () => {
+    const response = await axios.post('/api/login/', { username, password });
+    localStorage.setItem('token', response.data.token);
+  }
     return(
         <div className='login-container'>
             
@@ -9,10 +16,11 @@ function Login(){
             <div className='login-left'>
                 <div className='credentials'>
                 <h1>OBE-System</h1>
-                <input type='text' placeholder='Enter Username'></input><br></br>
-                <input type='password' placeholder='Enter Password'></input><br></br>
-                <button className='login-btn'>Login</button>
-
+                <form onSubmit={handleLogin}>
+                <input type='text' value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}></input><br></br>
+                <input type='password' value={password} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)}></input><br></br>
+                <button className='login-btn' type='submit'>Login</button>
+                </form>
                 </div>
                 
             </div>
