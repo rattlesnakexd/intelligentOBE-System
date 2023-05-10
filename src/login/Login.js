@@ -6,8 +6,7 @@ function Login(){
     const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const handleLogin = async () => {
-    const response = await axios.post('/api/login/', { username, password });
-    localStorage.setItem('token', response.data.token);
+    const response = await axios.post('/login/', { username, password });
   }
     return(
         <div className='login-container'>
