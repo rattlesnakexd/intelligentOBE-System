@@ -1,12 +1,19 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 import './Login.css'
+import { useNavigate } from 'react-router-dom';
 
 function Login(){
-    const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const handleLogin = async () => {
-    const response = await axios.post('/login/', { username, password });
+  const navigate = useNavigate();
+  const HandleLogin = async () => {
+    if (username === "abdullah"){
+        if (password === "123456"){
+            navigate("/master-sheet");
+           
+        }
+    }
+    
   }
     return(
         <div className='login-container'>
@@ -15,7 +22,7 @@ function Login(){
             <div className='login-left'>
                 <div className='credentials'>
                 <h1>OBE-System</h1>
-                <form onSubmit={handleLogin}>
+                <form onSubmit={HandleLogin}>
                 <input type='text' value={username} placeholder='Enter Username' onChange={(e) => setUsername(e.target.value)}></input><br></br>
                 <input type='password' value={password} placeholder='Enter Password' onChange={(e) => setPassword(e.target.value)}></input><br></br>
                 <button className='login-btn' type='submit'>Login</button>
