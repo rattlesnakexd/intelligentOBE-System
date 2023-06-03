@@ -6,15 +6,15 @@ import "./TeacherHome.css"
 
 function TeacherHome (){
     const navbarItems = [
-        { id: 1, label: 'Generate Sheets', url: '/master-sheet' },
-        { id: 2, label: 'Upload Sheets', url: '/section-sheet' },
-        { id: 3, label: 'Generate Reports', url: '/logout' },
+        { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
+        { id: 2, label: 'Upload Sheets', url: '/upload-sheet' },
+        { id: 3, label: 'Generate Reports', url: '/generate-report' },
         { id: 4, label: 'Logout', url: '/' },
       ];
-    const topbarName = 'Admin';
+    const topbarName = 'Teaacher';
     const columns = ["CourseCode", "Course", "Section", "Teacher", "Link"];
     const data = [
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ" },
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ"},
       { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "B", Teacher: "XYZ"},
       { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "C", Teacher: "XYZ"},
     ];
@@ -36,14 +36,11 @@ function TeacherHome (){
             <div className="table">
                 <div className="table-data">
                     <Table columns={columns} data={data} checkBox={false}></Table>
-
                 </div>
                 <div className="table-actions">
                 </div>
             </div>
-        
             </div>
-
             </div>
         </div>
     );
