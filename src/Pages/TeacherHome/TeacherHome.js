@@ -8,7 +8,7 @@ import "./TeacherHome.css"
 function TeacherHome (){
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
-        { id: 2, label: 'Upload Sheets', url: '/upload-sheet' },
+        { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },
         { id: 3, label: 'Generate Reports', url: '/generate-report' },
         { id: 4, label: 'Logout', url: '/' },
       ];
