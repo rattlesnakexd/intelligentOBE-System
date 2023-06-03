@@ -1,10 +1,10 @@
 import React from "react";
-import VerticalNavbar from "../navbar/navbar";
-import TopBar from "../topbar/topbar";
-import Button from "../button/button";
-import DropdownMenu from "../dropDown Menu/dropDown";
+import VerticalNavbar from "../../Components/navbar/navbar";
+import TopBar from "../../Components/topbar/topbar";
+import Button from "../../Components/button/button";
+import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import './AdminHome.css'
-import Table from "../table/table";
+import Table from "../../Components/table/table";
 
 function AdminHome(){
 

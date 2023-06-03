@@ -1,5 +1,5 @@
-import AdminHome from './AdminHome/AdminHome';
-import Login from './login/Login';
+import AdminHome from './Pages/AdminHome/AdminHome';
+import Login from './Pages/login/Login';
 import './App.css';
 
 function App() {
