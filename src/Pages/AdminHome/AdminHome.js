@@ -11,7 +11,7 @@ function AdminHome(){
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
         { id: 2, label: 'Section Sheet', url: '/section-sheet' },
-        { id: 3, label: 'Logout', url: '/logout' },
+        { id: 3, label: 'Logout', url: '/' },
       ];
     const topbarName = 'Admin';
     const columns = ["Name", "Location"];

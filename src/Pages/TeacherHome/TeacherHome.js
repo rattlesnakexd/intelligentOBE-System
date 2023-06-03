@@ -9,7 +9,7 @@ function TeacherHome (){
         { id: 1, label: 'Generate Sheets', url: '/master-sheet' },
         { id: 2, label: 'Upload Sheets', url: '/section-sheet' },
         { id: 3, label: 'Generate Reports', url: '/logout' },
-        { id: 4, label: 'Logout', url: '/logout' },
+        { id: 4, label: 'Logout', url: '/' },
       ];
     const topbarName = 'Admin';
     const columns = ["CourseCode", "Course", "Section", "Teacher", "Link"];
