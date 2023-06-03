@@ -1,12 +1,12 @@
 import React from "react";
-import "./table.css"
+import "./table.css";
 
-function Table({ columns, data }) {
+function Table({ columns, data, checkBox }) {
   return (
     <table>
       <thead>
         <tr>
-          <th></th>
+          {checkBox && <th></th>} {/* Render the checkbox column only when checkBox is true */}
           {columns.map((column, index) => (
             <th key={index}>{column}</th>
           ))}
@@ -15,9 +15,11 @@ function Table({ columns, data }) {
       <tbody>
         {data.map((row, index) => (
           <tr key={index}>
-            <td>
-              <input type="checkbox" />
-            </td>
+            {checkBox && ( /* Render the checkbox cell only when checkBox is true */
+              <td>
+                <input type="checkbox" />
+              </td>
+            )}
             {columns.map((column, index) => (
               <td key={index}>{row[column]}</td>
             ))}

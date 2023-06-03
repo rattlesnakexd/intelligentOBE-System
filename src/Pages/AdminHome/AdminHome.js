@@ -40,7 +40,7 @@ function AdminHome(){
             </div>
             <div className="table">
                 <div className="table-data">
-                    <Table columns={columns} data={data}></Table>
+                    <Table columns={columns} data={data} checkBox={true}></Table>
 
                 </div>
                 <div className="table-actions">
