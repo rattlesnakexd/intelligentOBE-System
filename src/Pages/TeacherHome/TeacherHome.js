@@ -1,6 +1,7 @@
 import React from "react";
 import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
+import Button from "../../Components/button/button";
 import Table from "../../Components/table/table";
 import "./TeacherHome.css"
 
@@ -11,12 +12,12 @@ function TeacherHome (){
         { id: 3, label: 'Generate Reports', url: '/generate-report' },
         { id: 4, label: 'Logout', url: '/' },
       ];
-    const topbarName = 'Teaacher';
-    const columns = ["CourseCode", "Course", "Section", "Teacher", "Link"];
+    const topbarName = 'Teacher';
+    const columns = ["CourseCode", "Course", "Section", "Teacher", "Download"];
     const data = [
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ"},
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "B", Teacher: "XYZ"},
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "C", Teacher: "XYZ"},
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ", Download: <Button label={"Generate Sheet"}></Button>},
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "B", Teacher: "XYZ", Download: <Button label={"Generate Sheet"}></Button>},
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "C", Teacher: "XYZ", Download: <Button label={"Generate Sheet"}></Button>},
     ];
 
     return (

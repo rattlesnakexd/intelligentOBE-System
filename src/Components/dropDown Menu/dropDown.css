@@ -42,11 +42,13 @@
     width: 0;
     height: 0;
     vertical-align: middle;
-    border-style: solid;
+    border: solid;
     border-width: 5px 5px 0 5px;
+    border-color: #000 transparent transparent transparent;
   }
   
   .arrow.up {
     border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #000 transparent;
   }
   

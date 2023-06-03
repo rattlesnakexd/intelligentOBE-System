@@ -12,7 +12,7 @@ function DropdownMenu(props) {
     <div className="dropdown">
       <button className="dropbtn" onClick={toggleMenu}>
         {props.label}
-        <i className={`arrow ${showMenu ? 'up' : 'down'}`} /> {/* add arrow icon */}
+        <i className={`arrow ${showMenu ? "up" : "down"}`} />
       </button>
       {showMenu && (
         <div className="dropdown-content">
