@@ -9,7 +9,7 @@ function Login(){
   const HandleLogin = async () => {
     if (username === "abdullah"){
         if (password === "123456"){
-            navigate("/master-sheet");
+            navigate("/master-sheet", {state: {name:'abdullah'}});
            
         }
     }

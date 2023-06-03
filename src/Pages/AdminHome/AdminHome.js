@@ -6,14 +6,14 @@ import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import './AdminHome.css'
 import Table from "../../Components/table/table";
 
-function AdminHome(){
+function AdminHome(props){
 
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
         { id: 2, label: 'Section Sheet', url: '/section-sheet' },
         { id: 3, label: 'Logout', url: '/' },
       ];
-    const topbarName = 'Admin';
+    const topbarName = "Admin";
     const columns = ["CLO", "PLO"];
     const data = [
       { CLO: "Example CLO 1", PLO: "1" },
