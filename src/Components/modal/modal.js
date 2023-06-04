@@ -44,7 +44,7 @@ const Modal = ({openModal, setOpenModal}) => {
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>
           <div className="modal-buttons">
-            <button type="submit">Submit</button>
+            <button type="submit">Confirm</button>
             <button onClick={handleCancel}>Cancel</button>
           </div>
         </form>
