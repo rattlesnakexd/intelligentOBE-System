@@ -1,12 +1,17 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
 import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import './section.css'
 import Table from "../../Components/table/table";
+import { useLocation } from 'react-router-dom';
 
 function Section(){
+    const location = useLocation();
+    const name = location?.state?.name;
 
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
@@ -28,7 +33,7 @@ function Section(){
             </div>
             <div className="right">
             <div className="right-top">
-            <TopBar items={topbarName}></TopBar>
+            <TopBar items={topbarName} name={name}></TopBar>
 
             </div>
             <div className="right-bottom">
@@ -43,6 +48,15 @@ function Section(){
 
                 </div>
                 <div className="table-actions">
+                <button className="simple-button">
+                                <FontAwesomeIcon icon={faPlus} />
+                            </button>
+                            <button className="simple-button">
+                                <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                            <button className="simple-button">
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
                 </div>
             </div>
             </div> 

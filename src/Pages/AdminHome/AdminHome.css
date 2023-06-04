@@ -47,4 +47,12 @@
 .table-actions{
     flex-direction: column;
     display: flex;
+    margin-left: 15px;
+    margin-top: 50px;
+}
+.simple-button{
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    
 }

@@ -8,9 +8,13 @@ function Login(){
   const navigate = useNavigate();
   const HandleLogin = async () => {
     if (username === "abdullah"){
-        if (password === "123456"){
-            navigate("/master-sheet", {state: {name:'abdullah'}});
-           
+        if (password === "abdullah.123"){
+            navigate("/master-sheet", {state: {name:'Abdullah'}}); 
+        }
+    }
+    else if (username === "ahmad"){
+        if (password ==="ahmad.123"){
+            navigate("/generate-sheets", {state: {name:'Ahmad'}}); 
         }
     }
     

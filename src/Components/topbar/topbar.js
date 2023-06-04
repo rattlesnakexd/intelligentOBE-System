@@ -6,7 +6,7 @@ function TopBar(props){
         <h1 className="Heading">OBE System/{props.items}</h1>
         <div className="profile">
           <img src="images/default-picture.jpg" alt="Profile" />
-          <p>Abdullah Sohail</p>
+          <p>{props.name}</p>
         </div>
       </div>
 
