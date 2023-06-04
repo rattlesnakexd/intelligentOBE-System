@@ -3,13 +3,12 @@ import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
 import Table from "../../Components/table/table";
-import "./TeacherHome.css"
+import "./GenerateResults.css"
 import { useLocation } from 'react-router-dom';
 
-function TeacherHome (){
+function GenerateResults (){
     const location = useLocation();
     const name = location?.state?.name;
-
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
         { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },
@@ -17,15 +16,15 @@ function TeacherHome (){
         { id: 4, label: 'Logout', url: '/' },
       ];
     const topbarName = 'Teacher';
-    const columns = ["CourseCode", "Course", "Section", "Teacher", "Download"];
+    const columns = ["CourseCode", "Course", "Section", "Teacher", "Upload"];
     const data = [
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ", Download: <Button label={"Generate Sheet"}></Button>},
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "B", Teacher: "XYZ", Download: <Button label={"Generate Sheet"}></Button>},
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "C", Teacher: "XYZ", Download: <Button label={"Generate Sheet"}></Button>},
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ", Upload: <Button label={"Generate Reports"}></Button>},
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "B", Teacher: "XYZ", Upload: <Button label={"Generate Reports"}></Button>},
+      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "C", Teacher: "XYZ", Upload: <Button label={"Generate Reports"}></Button>},
     ];
 
     return (
-        <div className="TeacherHomeContainer">
+        <div className="UploadSheetContainer">
             <div className="left">
             <VerticalNavbar items={navbarItems}></VerticalNavbar>
             </div>
@@ -35,7 +34,7 @@ function TeacherHome (){
 
             </div>
             <div className="right-bottom">
-            <h1>Generate Sheets</h1>
+            <h1>Generate Report Cards</h1>
             <div className="lists">
             </div>
             <div className="table">
@@ -51,4 +50,4 @@ function TeacherHome (){
     );
 }
 
-export default TeacherHome;
+export default GenerateResults;
