@@ -4,11 +4,9 @@ import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
 import Table from "../../Components/table/table";
 import "./UploadSheet.css"
-import { useLocation } from 'react-router-dom';
 
 function UploadSheet (){
-    const location = useLocation();
-    const name = location?.state?.name;
+    const name = "Ahmad";
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
         { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },

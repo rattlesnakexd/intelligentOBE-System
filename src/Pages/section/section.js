@@ -8,11 +8,9 @@ import Button from "../../Components/button/button";
 import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import './section.css'
 import Table from "../../Components/table/table";
-import { useLocation } from 'react-router-dom';
 
 function Section(){
-    const location = useLocation();
-    const name = location?.state?.name;
+    const name = "Abdullah"
     const [opneModal, setOpenModal] = useState(false);
 
     const navbarItems = [

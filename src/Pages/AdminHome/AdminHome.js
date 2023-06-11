@@ -8,11 +8,9 @@ import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import Modal from "../../Components/modal/modal";
 import './AdminHome.css'
 import Table from "../../Components/table/table";
-import { useLocation } from 'react-router-dom';
 
 function AdminHome(props){
-    const location = useLocation();
-    const name = location?.state?.name;
+    const name = "Abdullah"
     const [opneModal, setOpenModal] = useState(false);
 
     const navbarItems = [
@@ -56,11 +54,11 @@ function AdminHome(props){
                         <div className="table-actions">
                             <button className="simple-button">
                                 <FontAwesomeIcon icon={faPlus} 
-                                onClick={handleModal}/>
+                                onClick={handleModal }/>
                             </button>
                             <button className="simple-button">
                                 <FontAwesomeIcon icon={faTrash}
-                                onClick={handleModal} />
+                                onClick={handleModal } />
                             </button>
                             <button className="simple-button">
                                 <FontAwesomeIcon icon={faEdit} 
@@ -68,7 +66,7 @@ function AdminHome(props){
                             </button>
                         </div>
                         <div>
-                            {opneModal && <Modal opneModal={opneModal} setOpenModal={setOpenModal}/>}
+                            {opneModal && <Modal opneModal={opneModal} setOpenModal={setOpenModal} />}
                         </div>
                     </div>
                 </div>

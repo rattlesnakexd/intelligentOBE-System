@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './modal.css';
 
-const Modal = ({openModal, setOpenModal}) => {
+const Modal = ({openModal, setOpenModal, title}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -24,7 +24,7 @@ const Modal = ({openModal, setOpenModal}) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h2>Modal Title</h2>
+        <h2>Update Data</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
