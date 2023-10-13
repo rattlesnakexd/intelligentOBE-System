@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // New state
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -38,30 +39,37 @@ function Login() {
         <div className='credentials'>
           <h1>OBE-System</h1>
           <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column"}}>
-          <TextField 
+            <TextField 
               type='text' 
               label='Username' 
               value={username} 
               onChange={(e) => setUsername(e.target.value)} 
               required 
-              style={{ marginBottom: '10px' }} // Add some margin
+              style={{ marginBottom: '10px' }} 
               size='small'
             />
             <TextField 
-              type='password' 
+              type={showPassword ? 'text' : 'password'} // Toggle password visibility
               label='Password' 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               required 
-              style={{ marginBottom: '10px' }} // Add some margin
               size='small'
+            />
+            <FormControlLabel
+              control={<Checkbox 
+                checked={showPassword} 
+                onChange={(e) => setShowPassword(e.target.checked)} 
+                color="primary" 
+              />}
+              label="Show Password"
             />
             <Button 
               className='login-btn' 
               type='submit' 
               variant='contained' 
               color='primary' 
-              fullWidth={false} // No need for fullWidth
+              fullWidth={false} 
             >
               Login
             </Button>
