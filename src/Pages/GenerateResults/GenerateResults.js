@@ -3,10 +3,12 @@ import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
 import Table from "../../Components/table/table";
+import { useUser } from "../../Context/UserContext";
 import "./GenerateResults.css"
 
 function GenerateResults (){
-    const name = "Ahmad";
+    const {user} = useUser();
+    const name = user?.name;
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
         { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },

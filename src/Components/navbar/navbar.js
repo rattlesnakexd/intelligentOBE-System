@@ -6,6 +6,8 @@ function VerticalNavbar(props) {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
+    localStorage.removeItem('role');
+    localStorage.removeItem('user')
     navigate('/'); // Navigate to the '/login' route
   };
 

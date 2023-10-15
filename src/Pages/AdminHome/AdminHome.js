@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
 import VerticalNavbar from "../../Components/navbar/navbar";
@@ -8,9 +8,11 @@ import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import Modal from "../../Components/modal/modal";
 import './AdminHome.css'
 import Table from "../../Components/table/table";
+import { useUser } from '../../Context/UserContext';
 
 function AdminHome(props){
-    const name = "Abdullah"
+    const { user } = useUser();
+    const name = user?.name
     const [opneModal, setOpenModal] = useState(false);
 
     const navbarItems = [
@@ -50,20 +52,6 @@ function AdminHome(props){
                     <div className="table">
                         <div className="table-data">
                             <Table columns={columns} data={data} checkBox={true}></Table>
-                        </div>
-                        <div className="table-actions">
-                            <button className="simple-button">
-                                <FontAwesomeIcon icon={faPlus} 
-                                onClick={handleModal }/>
-                            </button>
-                            <button className="simple-button">
-                                <FontAwesomeIcon icon={faTrash}
-                                onClick={handleModal } />
-                            </button>
-                            <button className="simple-button">
-                                <FontAwesomeIcon icon={faEdit} 
-                                onClick={handleModal}/>
-                            </button>
                         </div>
                         <div>
                             {opneModal && <Modal opneModal={opneModal} setOpenModal={setOpenModal} />}

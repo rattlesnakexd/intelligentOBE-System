@@ -8,9 +8,11 @@ import Button from "../../Components/button/button";
 import DropdownMenu from "../../Components/dropDown Menu/dropDown";
 import './section.css'
 import Table from "../../Components/table/table";
+import {useUser} from "../../Context/UserContext"
 
 function Section(){
-    const name = "Abdullah"
+    const {user} = useUser();
+    const name = user?.name
     const [opneModal, setOpenModal] = useState(false);
 
     const navbarItems = [

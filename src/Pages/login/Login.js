@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
+import { useUser } from '../../Context/UserContext';
+import { TextField, Button, Checkbox, FormControlLabel, Snackbar } from '@mui/material';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false); // New state
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+  const {setUser} = useUser()
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,6 +23,7 @@ function Login() {
       if (response.data) {
         console.log(response.data);
         localStorage.setItem('role', response.data.role);
+        setUser(response.data)
 
         setTimeout(() => {
           if (localStorage.getItem('role') === "admin") {
@@ -30,8 +35,13 @@ function Login() {
       } 
     } catch (error) {
       console.error('Error:', error);
+        setError('An error occurred. Please try again.');
+        setOpen(true);
     }
   }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className='login-container'>
@@ -74,6 +84,12 @@ function Login() {
               Login
             </Button>
           </form>
+          <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={error}
+      />
         </div>
       </div>
       <div className='login-right'>
