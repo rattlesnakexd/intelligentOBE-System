@@ -9,15 +9,65 @@ import MenuItem from "@mui/material/MenuItem";
 import './AdminHome.css'
 import TableComponent from "../../Components/table/table";
 import { useUser } from '../../Context/UserContext';
+import axios from "axios";
+import Cookies from 'js-cookie';
+import { Snackbar } from "@mui/material";
 
 function AdminHome(props){
     const { user } = useUser();
     const name = user?.name
+    const id = user?.employee_id
     const [semester, setSemester] = useState(1);
+    const [error, setError] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const handleChange = (event) => {
         setSemester(event.target.value);
     };
+    const handleFileUpload = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;  // Exit if no file is selected
+    
+        const formData = new FormData();
+        
+        formData.append('file', file);
+        formData.append('employee_id', id);  // Add employee_id to formData
+        
+        const csrfToken = Cookies.get('csrftoken');
+        
+        try {
+            const response = await axios.post('http://localhost:8000/masterSheet/upload-excel/', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'X-CSRFToken': csrfToken
+                },
+                withCredentials: true,
+            });
+            
+            console.log(response.data);  
+            if(response.data.message) {  
+                setError(response.data.message);  
+                setOpen(true);  
+            }
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            if(error.response && error.response.data && error.response.data.error) {  
+                setError(error.response.data.error);  
+                setOpen(true);  
+            } else {
+                setError("An error occurred while uploading the file.");  
+                setOpen(true);  
+            }
+        }
+    
+        // Reset the input value so that user can upload the same file again if needed
+        event.target.value = "";
+    };
+    
+    
+    const handleClose = () => {
+        setOpen(false);
+      };
 
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
@@ -30,7 +80,7 @@ function AdminHome(props){
         {
             id: "clos",
             label: "CLOs",
-            minWidth: 300,
+            minWidth: 270,
             align: "center"
         },
         {
@@ -42,7 +92,7 @@ function AdminHome(props){
         {
             id: "plosName",
             label: "PLO Name",
-            minWidth: 300,
+            minWidth: 270,
             align: "center"
         },
     ];
@@ -67,7 +117,18 @@ function AdminHome(props){
                 </div>
                 <div className="right-bottom">
                     <h1>Upload Master Sheet</h1>
-                    <Button label={"Upload Master Sheet"}></Button>
+                    <label className="Upload-Master" htmlFor="file-upload">
+                        Upload Master Sheet
+                        </label>
+                        <div style={{marginBottom: 10}}>
+                            <input 
+                                id="file-upload"
+                                type="file" 
+                                accept=".xlsx, .xls" // This limits the input to Excel files
+                                hidden 
+                                onChange={handleFileUpload} 
+                            />
+                        </div>
                     <div className="lists">
                         <FormControl variant="outlined" style={{width: 200, marginRight: 20}} size="small">
                             <InputLabel htmlFor="semester-select">Semester No</InputLabel>
@@ -110,6 +171,12 @@ function AdminHome(props){
                             <TableComponent columns={columns} rows={data}/>
                         </div>
                     </div>
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                        message={error}
+                        />
                 </div>
             </div>
         </div>

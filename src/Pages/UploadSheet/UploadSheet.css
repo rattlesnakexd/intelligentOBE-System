@@ -29,10 +29,6 @@
     transform: scale(1.1);
 }
 
-.lists{
-    margin-top: 20px;
-}
-
 .table{
     flex-direction: row;
     display: flex;

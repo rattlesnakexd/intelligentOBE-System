@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Context/UserContext';
 import { TextField, Button, Checkbox, FormControlLabel, Snackbar } from '@mui/material';
+import Cookies from 'js-cookie';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -18,7 +19,16 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/authentication/get_user/?username=${username}&password=${password}`);
+
+      const csrfToken = Cookies.get('csrftoken');
+      console.log(csrfToken)
+      const response = await axios.post(`http://127.0.0.1:8000/auth/login`, { username, password }, {
+        headers: {
+          'X-CSRFToken': csrfToken,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
 
       if (response.data) {
         console.log(response.data);
@@ -38,7 +48,8 @@ function Login() {
         setError('An error occurred. Please try again.');
         setOpen(true);
     }
-  }
+}
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -85,11 +96,11 @@ function Login() {
             </Button>
           </form>
           <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message={error}
-      />
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              message={error}
+            />
         </div>
       </div>
       <div className='login-right'>
