@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
-import './section.css'
+import '../../Assests/Styles.css'
 import TableComponent from "../../Components/table/table";
 import {useUser} from "../../Context/UserContext"
 import InputLabel from "@mui/material/InputLabel";
@@ -48,7 +48,7 @@ function Section(){
     ];
 
     return(
-        <div className="section-container">
+        <div className="admin-home-container">
             <div className="left">
             <VerticalNavbar items={navbarItems}></VerticalNavbar>
             </div>

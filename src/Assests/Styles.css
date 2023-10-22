@@ -1,4 +1,4 @@
-.section-container{
+.admin-home-container{
     flex-direction: row;
     display: flex;
 }
@@ -17,10 +17,13 @@
 }
 
 .Upload-Master{
-    padding: 20px;
-    border-radius: 30px;
+    padding: 15px;
+    border-radius: 10px;
     border: none;
     font-weight: bold;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    
 }
 
 .Upload-Master:hover{
@@ -30,21 +33,34 @@
 }
 
 .lists{
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
 .table{
-    flex-direction: row;
+    flex-direction: column;
     display: flex;
     margin-top: 20px;
 }
 
 .table-data{
-    width: 70%;
     border-radius: 30px ;
 }
 
 .table-actions{
     flex-direction: column;
     display: flex;
+    margin-left: 15px;
+    margin-top: 50px;
+}
+.simple-button{
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.clear-data-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
 }

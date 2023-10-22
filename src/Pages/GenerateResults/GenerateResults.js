@@ -4,7 +4,7 @@ import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
 import Table from "../../Components/table/table";
 import { useUser } from "../../Context/UserContext";
-import "./GenerateResults.css"
+import '../../Assests/Styles.css'
 
 function GenerateResults (){
     const {user} = useUser();
