@@ -119,6 +119,7 @@ function AdminHome(props){
         setDeleteData(false);
         setSemester(0)
         setSelectedCourse("")
+        setCloData([]);
     }, [deleteData, id]);
     
     useEffect(() => {
@@ -196,8 +197,7 @@ function AdminHome(props){
         fetchDataForSelectedCourse();
     
     }, [selectedCourse, id]); // This useEffect triggers whenever selectedCourse or id changes
-    
-    
+        
 
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
