@@ -25,6 +25,7 @@ function AdminHome(props){
     const [openModal, setOpenModal] = useState(false);
     const [courseCodes, setCourseCodes] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState("");
+    const [dataExists, setDataExists] = useState(true);
     const [cloData, setCloData] = useState([])
 
 
@@ -55,7 +56,9 @@ function AdminHome(props){
             console.log(response.data);  
             if(response.data.message) {  
                 setError(response.data.message);  
-                setOpen(true);  
+                setOpen(true);
+                setSemester(1)  
+                setDataExists(true)
             }
         } catch (error) {
             console.error("Error uploading file:", error);
@@ -70,8 +73,6 @@ function AdminHome(props){
     
         // Reset the input value so that user can upload the same file again if needed
         event.target.value = "";
-        setSemester(1)
-        
     };
     
     
@@ -99,6 +100,7 @@ function AdminHome(props){
     
                     if (response.status === 200) {
                         setError("Data cleared successfully");
+                        setDataExists(false);
                     } else {
                         setError("Failed to clear data");
                     }
@@ -198,7 +200,37 @@ function AdminHome(props){
     
     }, [selectedCourse, id]); // This useEffect triggers whenever selectedCourse or id changes
         
-
+    useEffect(() => {
+        const checkSemester = async () => {
+            try {
+                const response = await axios.get('http://localhost:8000/masterSheet/check-data', {
+                    params: {
+                        employee_id: id,
+                    },
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': Cookies.get('csrftoken'),
+                    },
+                });
+    
+                if (response.data.exists) {
+                    setSemester(1);
+                    setDataExists(true);
+                } else {
+                    setSemester(0);
+                    setDataExists(false);
+                }
+            } catch (error) {
+                console.error("Error checking semester:", error);
+                setSemester(0);
+                setDataExists(false); // You can choose to set this to false on error, or handle it differently
+            }
+        };
+    
+        checkSemester();
+    }, [id]);
+    
+    
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
         { id: 2, label: 'Section Sheet', url: '/section-sheet' },
@@ -302,13 +334,14 @@ function AdminHome(props){
                     </div>
                     <div className="table">
                             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-                                <Button 
-                                    variant="contained"
-                                    style={{backgroundColor: "red"}}
-                                    onClick={handleClearData}
-                                >
-                                    Clear Data
-                                </Button>
+                            <Button 
+                                variant="contained"
+                                style={{backgroundColor: dataExists ? "red" : "grey", color: "white", cursor: dataExists ? "pointer": "not-allowed"}}
+                                disabled={!dataExists}
+                                onClick={handleClearData}
+                            >
+                                Clear Data
+                            </Button>
                             </div>
                             <div>
                                 <TableComponent columns={columns} rows={cloData}/>
