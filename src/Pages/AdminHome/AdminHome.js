@@ -35,12 +35,12 @@ function AdminHome(props){
     };
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
-        if (!file) return;  // Exit if no file is selected
+        if (!file) return;
     
         const formData = new FormData();
         
         formData.append('file', file);
-        formData.append('employee_id', id);  // Add employee_id to formData
+        formData.append('employee_id', id);
         
         const csrfToken = Cookies.get('csrftoken');
         
@@ -71,7 +71,7 @@ function AdminHome(props){
             }
         }
     
-        // Reset the input value so that user can upload the same file again if needed
+        
         event.target.value = "";
     };
     
@@ -169,7 +169,7 @@ function AdminHome(props){
         const fetchDataForSelectedCourse = async () => {
             const csrfToken = Cookies.get('csrftoken');
             try {
-                // Make sure to adjust this endpoint URL if it's different
+                
                 const response = await axios.get('http://localhost:8000/masterSheet/get_clo', {
                     params: {
                         course_code: selectedCourse,
@@ -195,10 +195,10 @@ function AdminHome(props){
             }
         };
     
-        // Call the async function
+        
         fetchDataForSelectedCourse();
     
-    }, [selectedCourse, id]); // This useEffect triggers whenever selectedCourse or id changes
+    }, [selectedCourse, id]);
         
     useEffect(() => {
         const checkSemester = async () => {
@@ -223,7 +223,7 @@ function AdminHome(props){
             } catch (error) {
                 console.error("Error checking semester:", error);
                 setSemester(0);
-                setDataExists(false); // You can choose to set this to false on error, or handle it differently
+                setDataExists(false);
             }
         };
     
@@ -286,7 +286,7 @@ function AdminHome(props){
                             <input 
                                 id="file-upload"
                                 type="file" 
-                                accept=".xlsx, .xls" // This limits the input to Excel files
+                                accept=".xlsx, .xls"
                                 hidden 
                                 onChange={handleFileUpload} 
                             />
@@ -300,8 +300,8 @@ function AdminHome(props){
                                     name: "semester",
                                     id: "semester-select",
                                 }}
-                                value={semester != 0?semester: ""} // Set the value to the state
-                                onChange={handleChange} // Add the onChange handler
+                                value={semester != 0?semester: ""}
+                                onChange={handleChange}
                             >
                                 <MenuItem value={1}>1</MenuItem>
                                 <MenuItem value={2}>2</MenuItem>
