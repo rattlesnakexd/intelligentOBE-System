@@ -2,7 +2,7 @@ import React from "react";
 import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
 import Button from "../../Components/button/button";
-import Table from "../../Components/table/table";
+import TableComponent from "../../Components/table/table";
 import { useUser } from "../../Context/UserContext";
 import '../../Assests/Styles.css'
 
@@ -16,15 +16,49 @@ function UploadSheet (){
         { id: 4, label: 'Logout', url: '/' },
       ];
     const topbarName = 'Teacher';
-    const columns = ["CourseCode", "Course", "Section", "Teacher", "Upload"];
+    const columns = [
+        {
+            id: "code",
+            label: "Course Code",
+            minWidth: 270,
+            align: "center"
+        },
+        {
+            id: "course",
+            label: "Course Name",
+            minWidth: 270,
+            align: "center"
+        },
+        {
+            id: "section",
+            label: "Section",
+            minWidth: 70,
+            align: "center"
+        },
+        {
+            id: "teacher",
+            label: "Teacher",
+            minWidth: 270,
+            align: "center"
+        },
+        {
+            id: "download",
+            label: "Upload",
+            minWidth: 150,
+            align: "center",
+            format: (value) => (
+                <Button variant="contained" color="primary">
+                    Upload
+                </Button>
+            ),
+        },
+    ];
     const data = [
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "A", Teacher: "XYZ", Upload: <Button label={"Upload Sheet"}></Button>},
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "B", Teacher: "XYZ", Upload: <Button label={"Upload Sheet"}></Button>},
-      { CourseCode: "CS-1000", Course: "Programming Fundamentals", Section: "C", Teacher: "XYZ", Upload: <Button label={"Upload Sheet"}></Button>},
+    
     ];
 
     return (
-        <div className="UploadSheetContainer">
+        <div className="admin-home-container">
             <div className="left">
             <VerticalNavbar items={navbarItems}></VerticalNavbar>
             </div>
@@ -39,7 +73,7 @@ function UploadSheet (){
             </div>
             <div className="table">
                 <div className="table-data">
-                    <Table columns={columns} data={data} checkBox={false}></Table>
+                    <TableComponent columns={columns} rows={data}/>
                 </div>
                 <div className="table-actions">
                 </div>
