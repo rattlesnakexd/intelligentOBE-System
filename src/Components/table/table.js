@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import "./table.css";
 
-function TableComponent({ columns, rows}) {
+function TableComponent({ columns, rows }) {
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 275 }}>
@@ -30,14 +30,11 @@ function TableComponent({ columns, rows}) {
             {rows.length > 0 ? (
               rows.map((row) => (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
+                  {columns.map((column) => (
+                    <TableCell key={column.id} align={column.align}>
+                      {column.format ? column.format(row) : row[column.id]}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))
             ) : (

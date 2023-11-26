@@ -14,6 +14,7 @@ function TeacherHome (){
     const name = user?.name;
     const id = user?.employee_id;
     const [sectionData, setSectionData] = useState([]);
+    const [adminId, setAdminId] = useState("")
 
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
@@ -53,16 +54,12 @@ function TeacherHome (){
             minWidth: 150,
             align: "center",
             format: (value) => (
-                <Button variant="contained" color="primary">
+                <Button onClick={() => {handleRowData(value)}} variant="contained" color="primary">
                     Download
                 </Button>
             ),
         },
     ];
-    const data = [
-      
-    ];
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,6 +75,7 @@ function TeacherHome (){
                 });
                 if (response.data.sections) {
                     setSectionData(response.data.sections);
+                    setAdminId(response.data.sections.admin_id)
                 }
             } catch (error) {
                 console.error("Error fetching section data:", error);
@@ -86,6 +84,46 @@ function TeacherHome (){
     
         fetchData();
     }, [id]);
+
+    const handleRowData = (rowData) => {
+        handleDownload(rowData, adminId)
+      };
+
+      const handleDownload = async (rowData, adminId) => {
+        try {
+          const dataToSend = { rowData, adminId };
+          const response = await axios.post('http://localhost:8000/progressSheet/generate-sheet', dataToSend, {
+            responseType: 'blob',
+          });
+      
+          const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          const contentDisposition = response.headers['content-disposition'];
+          const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+          const matches = filenameRegex.exec(contentDisposition);
+          let filename = 'download.xlsx'; // Default filename if not found
+      
+          if (matches != null && matches[1]) {
+            filename = matches[1].replace(/['"]/g, '');
+          }
+      
+          const url = window.URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', filename);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      
+          console.log("Data sent:", response.data);
+        } catch (error) {
+          console.error("Error sending data:", error);
+        }
+      };
+      
+      
+      
+
+
 
     return (
         <div className="admin-home-container">
