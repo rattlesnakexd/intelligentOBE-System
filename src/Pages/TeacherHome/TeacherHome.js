@@ -120,11 +120,6 @@ function TeacherHome (){
         }
       };
       
-      
-      
-
-
-
     return (
         <div className="admin-home-container">
             <div className="left">
