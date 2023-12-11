@@ -265,7 +265,7 @@ function Section(){
                     }}
                 />
                 
-                <label className="Upload-Master" htmlFor="file-upload">
+                <label className="Upload-Master" htmlFor="file-upload" style={{cursor: !isValidYear(year) ? "not-allowed": "pointer"}}>
                     Upload Sections Sheet
                 </label>
                 <input 
