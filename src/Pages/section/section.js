@@ -220,6 +220,9 @@ function Section(){
         fetchData();
     }, [selectedCode, id]);
     
+    const isValidYear = (year) => {
+        return year.length === 4 && !isNaN(year) && parseInt(year, 10) > 0;
+};
 
     return(
         <div className="admin-home-container">
@@ -270,7 +273,8 @@ function Section(){
                     type="file" 
                     accept=".xlsx, .xls"
                     hidden 
-                    onChange={handleFileUpload} 
+                    onChange={handleFileUpload}
+                    disabled={!selectedSemester || !isValidYear(year)}
                 />
             </div>
 
