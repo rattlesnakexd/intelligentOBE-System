@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 import { Snackbar } from "@mui/material";
 import Button from "@mui/material/Button";
 import ConfirmationModal from "../../Components/modal/ConfirmationModal";
+import {TextField} from "@mui/material";
 
 function Section(){
     const {user} = useUser();
@@ -26,6 +27,8 @@ function Section(){
     const [selectedCode, setSelectedCode] = useState("");
     const [sectionData, setSectionData] = useState([]);
     const [codes, setCodes] = useState([]);
+    const [selectedSemester, setSelectedSemester] = useState("Spring");
+    const [year, setYear] = useState("");
 
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
@@ -230,18 +233,47 @@ function Section(){
             </div>
             <div className="right-bottom">
             <h1>Upload Section Sheet</h1>
-            <label className="Upload-Master" htmlFor="file-upload">
-                        Upload Sections Sheet
-                        </label>
-                        <div style={{marginBottom: 10}}>
-                            <input 
-                                id="file-upload"
-                                type="file" 
-                                accept=".xlsx, .xls"
-                                hidden 
-                                onChange={handleFileUpload} 
-                            />
-                        </div>
+
+            <div className="upload-section">
+                <FormControl variant="outlined" style={{ width: 200, marginRight: 10 }} size="small">
+                    <InputLabel htmlFor="semester-select">Semester</InputLabel>
+                    <Select
+                        value={selectedSemester}
+                        onChange={(e) => setSelectedSemester(e.target.value)}
+                        label="Semester"
+                        inputProps={{
+                            name: "semester",
+                            id: "semester-select",
+                        }}
+                    >
+                        <MenuItem value="Spring">Spring</MenuItem>
+                        <MenuItem value="Fall">Fall</MenuItem>
+                    </Select>
+                </FormControl>
+                <TextField
+                    label="Year"
+                    variant="outlined"
+                    value={year}
+                    onChange={(e) => setYear(e.target.value)}
+                    style={{ width: 200, marginRight: 10 }}
+                    size="small"
+                    inputProps={{
+                        maxLength: 4
+                    }}
+                />
+                
+                <label className="Upload-Master" htmlFor="file-upload">
+                    Upload Sections Sheet
+                </label>
+                <input 
+                    id="file-upload"
+                    type="file" 
+                    accept=".xlsx, .xls"
+                    hidden 
+                    onChange={handleFileUpload} 
+                />
+            </div>
+
             <div className="lists">
             <FormControl variant="outlined" style={{width: 200}} size="small">
                     <InputLabel htmlFor="course-select">Course Name</InputLabel>
