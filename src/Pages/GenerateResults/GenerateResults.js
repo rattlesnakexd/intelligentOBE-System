@@ -10,11 +10,11 @@ function GenerateResults (){
     const {user} = useUser();
     const name = user?.name;
     const navbarItems = [
-        { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
-        { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },
-        { id: 3, label: 'Generate Reports', url: '/generate-results' },
+        { id: 1, label: 'Master Sheet', url: '/master-sheet' },
+        { id: 2, label: 'Section Sheet', url: '/section-sheet' },
+        { id: 3, label: 'Generate Results', url: '/generate-results'},
         { id: 4, label: 'Logout', url: '/' },
-      ];
+    ];
     const topbarName = 'Teacher';
     const columns = [
         {

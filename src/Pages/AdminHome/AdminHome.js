@@ -234,7 +234,8 @@ function AdminHome(props){
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
         { id: 2, label: 'Section Sheet', url: '/section-sheet' },
-        { id: 3, label: 'Logout', url: '/' },
+        { id: 3, label: 'Generate Results', url: '/generate-results'},
+        { id: 4, label: 'Logout', url: '/' },
     ];
 
     const topbarName = "Admin";

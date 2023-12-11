@@ -6,8 +6,8 @@ function ProtectedRoutes(props) {
     const navigate = useNavigate();
     const currentURL = window.location.pathname;
     const role = {
-        admin: ["/generate-sheets","/progress-sheet","/generate-results"],
-        teacher: ["/master-sheet","/section-sheet"]
+        admin: ["/generate-sheets","/progress-sheet"],
+        teacher: ["/master-sheet","/section-sheet","/generate-results"]
     }
     useEffect(() => {
         let userRole = localStorage.getItem('role')

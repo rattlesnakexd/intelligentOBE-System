@@ -19,8 +19,7 @@ function TeacherHome (){
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
         { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },
-        { id: 3, label: 'Generate Reports', url: '/generate-results' },
-        { id: 4, label: 'Logout', url: '/' },
+        { id: 3, label: 'Logout', url: '/' },
       ];
     const topbarName = 'Teacher';
     const columns = [
