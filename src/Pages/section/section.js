@@ -57,9 +57,7 @@ function Section(){
             align: "center",
         }
     ];
-    const data = [
-      
-    ];
+
     const handleClose = () => {
         setOpen(false);
       };
@@ -74,6 +72,8 @@ function Section(){
         const formData = new FormData();
         formData.append('file', file);
         formData.append('employee_id', id);
+        const semesterYear = `${selectedSemester} ${year}`;
+        formData.append('semesterYear', semesterYear);
         
         const csrfToken = Cookies.get('csrftoken');
         

@@ -1,14 +1,19 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import VerticalNavbar from "../../Components/navbar/navbar";
 import TopBar from "../../Components/topbar/topbar";
-import Button from "../../Components/button/button";
+import Button  from "@mui/material/Button";
 import TableComponent from "../../Components/table/table";
 import { useUser } from "../../Context/UserContext";
 import '../../Assests/Styles.css'
+import axios from "axios";
+import Cookies from "js-cookie";
 
 function UploadSheet (){
     const {user} = useUser();
+    const [sectionData, setSectionData] = useState([]);
+    const [adminId, setAdminId] = useState("")
     const name = user?.name;
+    const id = user?.employee_id;
     const navbarItems = [
         { id: 1, label: 'Generate Sheets', url: '/generate-sheets' },
         { id: 2, label: 'Upload Progress Sheets', url: '/progress-sheet' },
@@ -52,9 +57,30 @@ function UploadSheet (){
             ),
         },
     ];
-    const data = [
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8000/sectionSheet/get-sections`, {
+                    params: {
+                        employee_id: id,
+                    }, 
+                    withCredentials: true,
+                    headers: {
+                        'X-CSRFToken': Cookies.get('csrftoken'),
+                    },
+                });
+                if (response.data.sections) {
+                    setSectionData(response.data.sections);
+                    setAdminId(response.data.sections.admin_id)
+                }
+            } catch (error) {
+                console.error("Error fetching section data:", error);
+            }
+        };
     
-    ];
+        fetchData();
+    }, [id]);
 
     return (
         <div className="admin-home-container">
@@ -72,7 +98,7 @@ function UploadSheet (){
             </div>
             <div className="table">
                 <div className="table-data">
-                    <TableComponent columns={columns} rows={data}/>
+                    <TableComponent columns={columns} rows={sectionData}/>
                 </div>
                 <div className="table-actions">
                 </div>
