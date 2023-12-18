@@ -7,9 +7,12 @@ import { useUser } from "../../Context/UserContext";
 import '../../Assests/Styles.css'
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Snackbar } from "@mui/material";
 
 function UploadSheet (){
     const {user} = useUser();
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState(null);
     const [sectionData, setSectionData] = useState([]);
     const [adminId, setAdminId] = useState("")
     const name = user?.name;
@@ -46,17 +49,32 @@ function UploadSheet (){
             align: "center"
         },
         {
-            id: "download",
+            id: "Upload",
             label: "Upload",
             minWidth: 150,
             align: "center",
             format: (value) => (
-                <Button variant="contained" color="primary">
-                    Upload
-                </Button>
-            ),
+                <>
+                    <label htmlFor={`file-upload-${value.code}-${value.section}`}>
+                        <Button variant="contained" color="primary" component="span">
+                            Upload
+                        </Button>
+                    </label>
+                    <input
+                        id={`file-upload-${value.code}-${value.section}`}
+                        type="file"
+                        accept=".xlsx, .xls"
+                        hidden
+                        onChange={(e) => handleFileUpload(e, value)}
+                    />
+                </>
+            ),            
         },
     ];
+
+    const handleClose = () => {
+        setOpen(false);
+      };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -82,6 +100,39 @@ function UploadSheet (){
         fetchData();
     }, [id]);
 
+    const handleFileUpload = async (e, section) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('sectionData', JSON.stringify(section));
+    
+        try {
+            const response = await axios.post(`http://localhost:8000/uploadSheet/upload-excel`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'X-CSRFToken': Cookies.get('csrftoken'),
+                },
+                withCredentials: true,
+            });
+            if(response.data.message) {  
+                setError(response.data.message);  
+                setOpen(true);  
+            }
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            if(error.response && error.response.data && error.response.data.error) {  
+                setError(error.response.data.error);  
+                setOpen(true);  
+            }else {
+                setError("An error occurred while uploading the file.");  
+                setOpen(true);  
+            }
+    }
+        e.target.value = "";
+    };
+    
+
     return (
         <div className="admin-home-container">
             <div className="left">
@@ -105,6 +156,12 @@ function UploadSheet (){
             </div>
             </div>
             </div>
+            <Snackbar
+                        open={open}
+                        autoHideDuration={6000}
+                        onClose={handleClose}
+                        message={error}
+                        />
         </div>
     );
 }

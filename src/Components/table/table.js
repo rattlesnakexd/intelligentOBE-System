@@ -28,8 +28,8 @@ function TableComponent({ columns, rows }) {
           </TableHead>
           <TableBody>
             {rows.length > 0 ? (
-              rows.map((row) => (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+              rows.map((row, index) => (
+                <TableRow hover role="checkbox" tabIndex={-1} key={`${row.code}-${index}`}>
                   {columns.map((column) => (
                     <TableCell key={column.id} align={column.align}>
                       {column.format ? column.format(row) : row[column.id]}
@@ -44,7 +44,7 @@ function TableComponent({ columns, rows }) {
                 </TableCell>
               </TableRow>
             )}
-          </TableBody> 
+          </TableBody>
         </Table>
       </TableContainer>
     </Paper>
