@@ -56,7 +56,7 @@ function UploadSheet (){
             format: (value) => (
                 <>
                     <label htmlFor={`file-upload-${value.code}-${value.section}`}>
-                        <Button variant="contained" color="primary" component="span">
+                        <Button variant="contained" color="primary" component="span" disabled={value.result_uploaded}>
                             Upload
                         </Button>
                     </label>
@@ -65,6 +65,7 @@ function UploadSheet (){
                         type="file"
                         accept=".xlsx, .xls"
                         hidden
+                        disabled={value.result_uploaded}
                         onChange={(e) => handleFileUpload(e, value)}
                     />
                 </>
