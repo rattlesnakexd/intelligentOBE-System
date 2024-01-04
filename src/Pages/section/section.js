@@ -251,6 +251,7 @@ function Section(){
                     >
                         <MenuItem value="Spring">Spring</MenuItem>
                         <MenuItem value="Fall">Fall</MenuItem>
+                        <MenuItem value="Summer">Summer</MenuItem>
                     </Select>
                 </FormControl>
                 <TextField
