@@ -125,6 +125,8 @@ function Section(){
                     if (response.status === 200) {
                         setError("Data cleared successfully");
                         setDataExists(false);
+                        setSelectedSemester("Spring")
+                        setYear("")
                     } else {
                         setError("Failed to clear data");
                     }
@@ -209,8 +211,11 @@ function Section(){
                         'X-CSRFToken': Cookies.get('csrftoken'),
                     },
                 });
-                if (response.data.sections) {
+                if (response.data) {
                     setSectionData(response.data.sections);
+                    const match = sectionData[0].semesterYear.match(/([a-zA-Z]+)\s(\d{4})/);
+                    setSelectedSemester(match[1])
+                    setYear(match[2])
                 }
             } catch (error) {
                 console.error("Error fetching section data:", error);
@@ -238,7 +243,7 @@ function Section(){
             <h1>Upload Section Sheet</h1>
 
             <div className="upload-section">
-                <FormControl variant="outlined" style={{ width: 200, marginRight: 10 }} size="small">
+                {!dataExists && <FormControl variant="outlined" style={{ width: 200, marginRight: 10 }} size="small">
                     <InputLabel htmlFor="semester-select">Semester</InputLabel>
                     <Select
                         value={selectedSemester}
@@ -253,8 +258,8 @@ function Section(){
                         <MenuItem value="Fall">Fall</MenuItem>
                         <MenuItem value="Summer">Summer</MenuItem>
                     </Select>
-                </FormControl>
-                <TextField
+                </FormControl>}
+                {!dataExists && <TextField
                     label="Year"
                     variant="outlined"
                     value={year}
@@ -264,7 +269,7 @@ function Section(){
                     inputProps={{
                         maxLength: 4
                     }}
-                />
+                />}
                 
                 <label className="Upload-Master" htmlFor="file-upload" style={{cursor: !isValidYear(year) ? "not-allowed": "pointer"}}>
                     Upload Sections Sheet

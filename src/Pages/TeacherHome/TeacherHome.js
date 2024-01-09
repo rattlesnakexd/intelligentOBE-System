@@ -99,7 +99,7 @@ function TeacherHome (){
           const contentDisposition = response.headers['content-disposition'];
           const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
           const matches = filenameRegex.exec(contentDisposition);
-          let filename = 'download.xlsx'; // Default filename if not found
+          let filename = 'download.xlsx';
       
           if (matches != null && matches[1]) {
             filename = matches[1].replace(/['"]/g, '');

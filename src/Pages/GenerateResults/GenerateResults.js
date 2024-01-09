@@ -11,6 +11,7 @@ function GenerateResults (){
     const {user} = useUser();
     const name = user?.name;
     const [batchDetails, setBatchDetails] = useState([]);
+    const [allUploaded, setAllUploaded] = useState(true);
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
         { id: 2, label: 'Section Sheet', url: '/section-sheet' },
@@ -31,13 +32,13 @@ function GenerateResults (){
             minWidth: 270,
             align: "center"
         },
-        {
+        { 
             id: "download",
             label: "Generate",
             minWidth: 150,
             align: "center",
             format: (value) => (
-                <Button variant="contained" color="primary" onClick={() => handleDownload(value)}>
+                <Button variant="contained" color="primary" disabled={!allUploaded} onClick={() => handleDownload(value)}>
                     Download
                 </Button>
             ),
@@ -45,7 +46,7 @@ function GenerateResults (){
     ];
 
     useEffect(() => {
-        // API call to fetch batch details
+
         const fetchBatchDetails = async () => {
             try {
                 const response = await axios.get('http://localhost:8000/generateResult/get-batches');
@@ -64,40 +65,54 @@ function GenerateResults (){
         try {
           const response = await axios.post("http://localhost:8000/generateResult/generate-results", { rowData }, { responseType: 'blob' });
       
-          // Parse the content-disposition header to extract the filename
+
           const contentDisposition = response.headers['content-disposition'];
           const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
           const matches = filenameRegex.exec(contentDisposition);
-          let filename = 'generated_files.zip'; // Default filename
+          let filename = 'generated_files.zip';
       
           if (matches != null && matches[1]) {
             filename = matches[1].replace(/['"]/g, '');
           }
       
-          // Create a Blob from the response data
+
           const file = new Blob([response.data], { type: 'application/zip' });
       
-          // Create a URL for the Blob
+
           const fileURL = URL.createObjectURL(file);
       
-          // Create a link element
+
           const link = document.createElement('a');
           link.href = fileURL;
-          link.setAttribute('download', filename); // Set the download attribute with extracted filename
+          link.setAttribute('download', filename);
       
-          // Append the link to the body
           document.body.appendChild(link);
       
-          // Click the link to trigger download
           link.click();
       
-          // Clean up: remove the link and revoke the URL object to free memory
           document.body.removeChild(link);
           URL.revokeObjectURL(fileURL);
         } catch (error) {
           console.error("Error downloading:", error);
         }
       };
+
+
+      useEffect(() => {
+
+        const fetchAllUploaded = async () => {
+          try {
+            const response = await axios.get('http://localhost:8000/generateResult/check-uploaded');
+            setAllUploaded(response.data.all_uploaded)
+            console.log(response.data.all_uploaded)
+            console.log(allUploaded)
+          } catch (error) {
+            console.error("Error fetching all_uploaded:", error);
+          }
+        };
+    
+        fetchAllUploaded();
+      }, [allUploaded]);
       
 
     return (
