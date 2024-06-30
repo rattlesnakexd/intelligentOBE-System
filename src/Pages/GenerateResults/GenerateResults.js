@@ -5,6 +5,7 @@ import Button  from "@mui/material/Button";
 import { useUser } from "../../Context/UserContext";
 import '../../Assests/Styles.css'
 import TableComponent from "../../Components/table/table";
+import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
 function GenerateResults (){
@@ -12,13 +13,14 @@ function GenerateResults (){
     const name = user?.name;
     const [batchDetails, setBatchDetails] = useState([]);
     const [allUploaded, setAllUploaded] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navbarItems = [
         { id: 1, label: 'Master Sheet', url: '/master-sheet' },
         { id: 2, label: 'Section Sheet', url: '/section-sheet' },
         { id: 3, label: 'Generate Results', url: '/generate-results'},
         { id: 4, label: 'Logout', url: '/' },
     ];
-    const topbarName = 'Teacher';
+    const topbarName = 'Admin';
     const columns = [
         {
             id: "batch",
@@ -38,10 +40,21 @@ function GenerateResults (){
             minWidth: 150,
             align: "center",
             format: (value) => (
-                <Button variant="contained" color="primary" disabled={!allUploaded} onClick={() => handleDownload(value)}>
-                    Download
-                </Button>
-            ),
+                <>
+                  {loading ? (
+                    <CircularProgress size={24} /> // Render CircularProgress if loading
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled={false}
+                      onClick={() => handleDownload(value)}
+                    >
+                      Download
+                    </Button>
+                  )}
+                </>
+              ),
         },
     ];
 
@@ -51,7 +64,12 @@ function GenerateResults (){
             try {
                 const response = await axios.get('http://localhost:8000/generateResult/get-batches');
                 if (response.data) {
-                    setBatchDetails(response.data);
+                    const sortedBatchDetails = response.data.sort((a, b) => {
+                        const batchA = parseInt(a.batch.split('-')[1]);
+                        const batchB = parseInt(b.batch.split('-')[1]);
+                        return batchB - batchA;
+                    });
+                    setBatchDetails(sortedBatchDetails);
                 }
             } catch (error) {
                 console.error("Error fetching batch details:", error);
@@ -63,8 +81,9 @@ function GenerateResults (){
 
     const handleDownload = async (rowData) => {
         try {
+            setLoading(true);
           const response = await axios.post("http://localhost:8000/generateResult/generate-results", { rowData }, { responseType: 'blob' });
-      
+            setLoading(false);
 
           const contentDisposition = response.headers['content-disposition'];
           const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
